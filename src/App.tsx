@@ -6,6 +6,7 @@ import 'yet-another-react-lightbox/styles.css';
 import { Album, getRawImages, groupIntoAlbums, measureImages, PhotoItem } from './albums';
 import { pickQuote } from './quotes';
 import { themeForPath, gradientCss, photoOverlayCss, setRuntimeBrand, setRuntimeThemes } from './theme';
+import SmartImage from './SmartImage';
 
 type ViewMode = 'stream' | 'by-album' | 'all';
 
@@ -159,10 +160,12 @@ function Gallery({ photos, onOpen, indexFor }: { photos: PhotoItem[]; onOpen: (i
         const theme = themeForPath(path);
         return (
           <div style={{ ...wrapperStyle, position: 'relative' }} className="relative overflow-hidden">
-            <img
-              {...imageProps}
-              loading="lazy"
-              decoding="async"
+            <SmartImage
+              // avoid spreading src from imageProps; use our thumb src already embedded
+              alt={imageProps.alt}
+              sizes={imageProps.sizes}
+              srcSet={imageProps.srcSet}
+              fetchPriority={'low'}
               className={(imageProps.className ?? '') + ' block'}
               style={{
                 ...imageProps.style,
@@ -170,6 +173,7 @@ function Gallery({ photos, onOpen, indexFor }: { photos: PhotoItem[]; onOpen: (i
                 height: '100%',
                 objectFit: 'cover',
               }}
+              src={(imageProps as any).src}
             />
             <div className="pointer-events-none absolute inset-0 z-10" style={{ backgroundImage: photoOverlayCss(theme) }} />
           </div>
