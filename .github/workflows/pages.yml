@@ -29,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install ImageMagick (for thumbnails)
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Generate thumbnails
+        run: npm run images:thumbs
+
       - name: Build site
         env:
           NODE_ENV: production

@@ -142,7 +142,8 @@ export default function App() {
 
 function Gallery({ photos, onOpen, indexFor }: { photos: PhotoItem[]; onOpen: (i: number) => void; indexFor?: (photo: PhotoItem, localIndex: number) => number }) {
   // Use title to carry repo path; alt remains the file name
-  const photoData: Photo[] = photos.map(p => ({ src: p.src, width: p.width, height: p.height, alt: p.file, title: p.path }));
+  // Use thumbnails for the grid; full-size for the lightbox
+  const photoData: Photo[] = photos.map(p => ({ src: (p as any).thumbSrc ?? p.src, width: p.width, height: p.height, alt: p.file, title: p.path }));
   return (
     <PhotoAlbum
       layout="rows"

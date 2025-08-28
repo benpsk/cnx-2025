@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "images:optimize": "mogrify -strip -resize '2000x2000>' -quality 85 images/**/*.jpg",
+    "images:thumbs": "scripts/generate-thumbs.sh"
   },
   "dependencies": {
     "react": "^18.3.1",

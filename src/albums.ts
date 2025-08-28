@@ -1,5 +1,6 @@
 export type RawImage = {
-  src: string;        // Vite-resolved URL
+  src: string;        // full-size URL (Vite-resolved)
+  thumbSrc: string;   // thumbnail URL if available; falls back to full
   path: string;       // Repo path like /images/foo/bar.jpg
   file: string;       // file name
   folder: string;     // immediate parent folder
@@ -18,17 +19,34 @@ export type Album = {
 };
 
 // Find images under /images recursively via Vite glob import
-// This returns an object { '/images/..jpg': Module }
-const modules = import.meta.glob('/images/**/*.{jpg,jpeg,JPG,JPEG}', { eager: true, import: 'default' });
+// - Full-size originals
+// - Optional thumbnails under /images/_thumbs with mirrored structure
+const fullModules = import.meta.glob('/images/**/*.{jpg,jpeg,JPG,JPEG}', { eager: true, import: 'default' });
+const thumbModules = import.meta.glob('/images/_thumbs/**/*.{webp,WEBP,jpg,jpeg,JPG,JPEG}', { eager: true, import: 'default' });
 
 export function getRawImages(): RawImage[] {
   const raws: RawImage[] = [];
-  Object.entries(modules).forEach(([absPath, url]) => {
+  Object.entries(fullModules).forEach(([absPath, url]) => {
+    // Skip any files inside the thumbnails directory
+    if (absPath.includes('/_thumbs/')) return;
     // absPath like '/images/trip/day-01/20240915-reykjavik-harbor.jpg'
     const segments = absPath.split('/').filter(Boolean);
     const file = segments[segments.length - 1];
     const folder = segments[segments.length - 2] ?? 'images';
-    raws.push({ src: url as string, path: absPath.slice(1), file, folder });
+    const repoPath = absPath.slice(1); // drop leading '/'
+    const rel = repoPath.replace(/^images\//, '');
+
+    // Try to find a matching thumbnail: images/_thumbs/<rel>.webp or same-ext
+    const thumbCandidates = [
+      `/images/_thumbs/${rel.replace(/\.[^.]+$/, '.webp')}`,
+      `/images/_thumbs/${rel}`,
+    ];
+    let thumbUrl: string | undefined;
+    for (const c of thumbCandidates) {
+      const u = thumbModules[c] as unknown as string | undefined;
+      if (u) { thumbUrl = u; break; }
+    }
+    raws.push({ src: url as string, thumbSrc: (thumbUrl ?? (url as string)), path: repoPath, file, folder });
   });
   return raws.sort((a, b) => a.path.localeCompare(b.path));
 }
