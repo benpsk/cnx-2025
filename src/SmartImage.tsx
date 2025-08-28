@@ -33,6 +33,10 @@ export const loaderQueue = new LoaderQueue(6);
 const TRANSPARENT_1PX =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
 
+// Simple in-memory cache of srcs that have finished loading at least once.
+// Helps avoid re-gating or re-intersecting images when switching views.
+const loadedSrcs = new Set<string>();
+
 type Props = {
   src: string;
   alt?: string;
@@ -43,9 +47,12 @@ type Props = {
   fetchPriority?: 'high' | 'low' | 'auto';
   width?: number | string;
   height?: number | string;
+  onClick?: React.MouseEventHandler<HTMLImageElement>;
+  onLoad?: React.ReactEventHandler<HTMLImageElement>;
+  onError?: React.ReactEventHandler<HTMLImageElement>;
 };
 
-export default function SmartImage({ src, alt, className, style, sizes, srcSet, fetchPriority = 'low', width, height }: Props) {
+export default function SmartImage({ src, alt, className, style, sizes, srcSet, fetchPriority = 'low', width, height, onClick, onLoad, onError }: Props) {
   const ref = useRef<HTMLImageElement | null>(null);
   const [inView, setInView] = useState(false);
   const [canLoad, setCanLoad] = useState(false);
@@ -69,6 +76,11 @@ export default function SmartImage({ src, alt, className, style, sizes, srcSet, 
   }, []);
 
   useEffect(() => {
+    // If we've already loaded this src before, skip gating/intersection and show immediately.
+    if (loadedSrcs.has(src)) {
+      setCanLoad(true);
+      return;
+    }
     if (!inView || canLoad) return;
     let cancelled = false;
     loaderQueue.acquire().then(release => {
@@ -77,12 +89,19 @@ export default function SmartImage({ src, alt, className, style, sizes, srcSet, 
       setCanLoad(true);
     });
     return () => { cancelled = true; };
-  }, [inView, canLoad]);
+  }, [inView, canLoad, src]);
 
   const handleDone = () => {
+    if (src) loadedSrcs.add(src);
     releaseRef.current?.();
     releaseRef.current = null;
   };
+
+  // Apply fetchpriority attribute directly to the DOM to avoid React warning
+  useEffect(() => {
+    if (!ref.current) return;
+    if (fetchPriority) ref.current.setAttribute('fetchpriority', fetchPriority);
+  }, [fetchPriority]);
 
   return (
     <img
@@ -95,12 +114,11 @@ export default function SmartImage({ src, alt, className, style, sizes, srcSet, 
       srcSet={canLoad ? srcSet : undefined}
       loading="lazy"
       decoding="async"
-      fetchPriority={fetchPriority}
       width={width as any}
       height={height as any}
-      onLoad={handleDone}
-      onError={handleDone}
+      onLoad={(e) => { onLoad?.(e); handleDone(); }}
+      onError={(e) => { onError?.(e); handleDone(); }}
+      onClick={onClick}
     />
   );
 }
-

@@ -31,8 +31,44 @@ export function themeForPath(path?: string): Theme {
     const parent2 = parts.slice(0, 2).join('/');
     if (runtimeThemes[parent2]) return runtimeThemes[parent2];
     if (folderThemes[parent2]) return folderThemes[parent2];
+    // No explicit theme → derive a stable color from folder path
+    const key = parent || parent2 || path;
+    return { color: pickColorForKey(key) };
   }
+  // Fallback when path doesn't include folders
   return runtimeBrand ?? brandTheme;
+}
+
+// Default palette to derive colors for folders without explicit themes.
+// These are chosen from Tailwind-ish mid-saturated colors.
+const DEFAULT_PALETTE = [
+  '#ef4444', // red-500
+  '#f59e0b', // amber-500
+  '#84cc16', // lime-500
+  '#10b981', // emerald-500
+  '#06b6d4', // cyan-500
+  '#3b82f6', // blue-500
+  '#6366f1', // indigo-500
+  '#8b5cf6', // violet-500
+  '#d946ef', // fuchsia-500
+  '#ec4899', // pink-500
+  '#14b8a6', // teal-500
+  '#22c55e', // green-500
+];
+
+function pickColorForKey(key: string): string {
+  const h = hashString(key);
+  const idx = h % DEFAULT_PALETTE.length;
+  return DEFAULT_PALETTE[idx];
+}
+
+function hashString(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0);
 }
 
 // LocalStorage helpers for overrides

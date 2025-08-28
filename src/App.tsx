@@ -5,7 +5,7 @@ import 'yet-another-react-lightbox/styles.css';
 
 import { Album, getRawImages, groupIntoAlbums, measureImages, PhotoItem } from './albums';
 import { pickQuote } from './quotes';
-import { themeForPath, gradientCss, photoOverlayCss, setRuntimeBrand, setRuntimeThemes } from './theme';
+import { themeForPath, gradientCss, photoOverlayCss, setRuntimeBrand, setRuntimeThemes, getRuntimeThemes } from './theme';
 import SmartImage from './SmartImage';
 
 type ViewMode = 'stream' | 'by-album' | 'all';
@@ -18,6 +18,8 @@ export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState<number>(-1);
   const [lightboxSlides, setLightboxSlides] = useState<{ src: string }[]>([]);
   const [shuffleTick, setShuffleTick] = useState(0);
+  // Session-based seed: new per browser refresh, stable across re-renders
+  const [sessionSeed] = useState(() => Math.floor(Math.random() * 0x7fffffff));
   // Quote frequency controller: -1 random (legacy), 0 none, N => 1 quote per N images
   const [quoteEveryN, setQuoteEveryN] = useState<number>(2);
   // Theme editor
@@ -32,6 +34,19 @@ export default function App() {
       setAlbums(groupIntoAlbums(measured));
     });
   }, []);
+
+  // Ensure each album folder has a distinct default color automatically
+  useEffect(() => {
+    if (!albums.length) return;
+    const albumPaths = Array.from(new Set(albums.map(a => a.path))).sort();
+    const palette = generatePalette(Math.max(12, albumPaths.length));
+    const existing = getRuntimeThemes();
+    const next = { ...existing } as Record<string, { color: string }>;
+    albumPaths.forEach((p, i) => {
+      if (!next[p]) next[p] = { color: palette[i % palette.length] };
+    });
+    setRuntimeThemes(next);
+  }, [albums]);
 
   // Apply runtime themes when overrides change
   useEffect(() => {
@@ -103,7 +118,7 @@ export default function App() {
       {!items && <p>Loading images…</p>}
 
       {items && view === 'stream' && (
-        <MixedStream photos={filtered ?? items} onOpen={setLightboxIndex} shuffleTick={shuffleTick} quoteEveryN={quoteEveryN} />
+        <MixedStream photos={filtered ?? items} onOpen={setLightboxIndex} shuffleTick={shuffleTick} quoteEveryN={quoteEveryN} sessionSeed={sessionSeed} />
       )}
 
       {items && view === 'all' && (
@@ -166,6 +181,9 @@ function Gallery({ photos, onOpen, indexFor }: { photos: PhotoItem[]; onOpen: (i
               sizes={imageProps.sizes}
               srcSet={imageProps.srcSet}
               fetchPriority={'low'}
+              onClick={(imageProps as any).onClick}
+              onLoad={(imageProps as any).onLoad}
+              onError={(imageProps as any).onError}
               className={(imageProps.className ?? '') + ' block'}
               style={{
                 ...imageProps.style,
@@ -231,39 +249,51 @@ function guessLocationFromPath(path: string): string | null {
 }
 
 type StreamItem =
-  | { kind: 'photo'; idx: number; src: string; file: string; path: string }
-  | { kind: 'quote'; text: string; author?: string; contextPath?: string };
+  | { kind: 'photo'; idx: number; src: string; file: string; path: string; wide: boolean; aspect: 'aspect-[4/3]' | 'aspect-square' | 'aspect-[3/4]' | 'aspect-[16/10]' }
+  | { kind: 'quote'; text: string; author?: string; contextPath?: string; wide: boolean; aspect: 'aspect-[16/9]' | 'aspect-[4/5]' | 'aspect-[5/4]' };
 
-function MixedStream({ photos, onOpen, shuffleTick, quoteEveryN }: { photos: PhotoItem[]; onOpen: (i: number) => void; shuffleTick: number; quoteEveryN: number }) {
+function MixedStream({ photos, onOpen, shuffleTick, quoteEveryN, sessionSeed }: { photos: PhotoItem[]; onOpen: (i: number) => void; shuffleTick: number; quoteEveryN: number; sessionSeed: number }) {
   const stream = useMemo<StreamItem[]>(() => {
-    // Start from a shuffled list of photos
-    const photoTiles: Extract<StreamItem, { kind: 'photo' }>[] = photos.map((p, idx) => ({ kind: 'photo', idx, src: p.src, file: p.file, path: p.path }));
-    shuffleInPlace(photoTiles);
+    // Deterministic RNG seeded by session (refresh), shuffleTick and quote settings
+    const seed = hashString(`seed:${sessionSeed}|${shuffleTick}|${quoteEveryN}|${photos.length}`);
+    const rng = mulberry32(seed);
+
+    // Start from a deterministically shuffled list of photos
+    const baseTiles = photos.map((p, idx) => ({ idx, src: p.src, file: p.file, path: p.path }));
+    const shuffled = seededShuffle(baseTiles, rng);
 
     // Build a mixed stream: insert quotes controlled by quoteEveryN
     const out: StreamItem[] = [];
     let sinceLastQuote = 0;
-    // If random (-1), vary 1-3; if fixed (>0), use that gap; if off (0), never insert
-    const nextGapRandom = () => rand(1, 3);
+    const nextGapRandom = () => 1 + Math.floor(rng() * 3); // 1-3
     let nextGap = quoteEveryN === -1 ? nextGapRandom() : Math.max(quoteEveryN, 1);
-    for (const tile of photoTiles) {
-      out.push(tile);
+    for (const tile of shuffled) {
+      // Stable layout choices per item using RNG
+      const wide = rng() < 0.22;
+      const aspects = ['aspect-[4/3]', 'aspect-square', 'aspect-[3/4]', 'aspect-[16/10]'] as const;
+      const aspect = aspects[Math.floor(rng() * aspects.length)];
+      out.push({ kind: 'photo', ...tile, wide, aspect });
+
       sinceLastQuote++;
       if (quoteEveryN === 0) continue; // never insert
-      const obey = quoteEveryN === -1 ? Math.random() < 0.9 : true; // random mode keeps some irregularity
+      const obey = quoteEveryN === -1 ? rng() < 0.9 : true; // random mode keeps some irregularity
       const shouldInsert = sinceLastQuote >= nextGap && obey;
       if (shouldInsert) {
         const q = pickQuote(tile.path, { location: guessLocationFromPath(tile.path) ?? undefined, when: undefined });
-        out.push({ kind: 'quote', text: q.text, author: q.author, contextPath: tile.path });
+        const qWide = rng() < 0.18;
+        const qAspect = qWide ? 'aspect-[16/9]' : (rng() < 0.4 ? 'aspect-[4/5]' : 'aspect-[5/4]');
+        out.push({ kind: 'quote', text: q.text, author: q.author, contextPath: tile.path, wide: qWide, aspect: qAspect });
         sinceLastQuote = 0;
         nextGap = quoteEveryN === -1 ? nextGapRandom() : Math.max(quoteEveryN, 1);
       }
     }
     // Optionally end with a quote (only in random mode)
-    if (quoteEveryN === -1 && out.length && out[out.length - 1].kind !== 'quote' && Math.random() < 0.3) {
+    if (quoteEveryN === -1 && out.length && out[out.length - 1].kind !== 'quote' && rng() < 0.3) {
       const last = out[out.length - 1] as Extract<StreamItem, { kind: 'photo' }>;
       const q = pickQuote(last.path, { location: guessLocationFromPath(last.path) ?? undefined, when: undefined });
-      out.push({ kind: 'quote', text: q.text, author: q.author, contextPath: last.path });
+      const qWide = rng() < 0.18;
+      const qAspect = qWide ? 'aspect-[16/9]' : (rng() < 0.4 ? 'aspect-[4/5]' : 'aspect-[5/4]');
+      out.push({ kind: 'quote', text: q.text, author: q.author, contextPath: last.path, wide: qWide, aspect: qAspect });
     }
     // Avoid double quotes
     for (let i = 1; i < out.length; i++) {
@@ -273,7 +303,7 @@ function MixedStream({ photos, onOpen, shuffleTick, quoteEveryN }: { photos: Pho
       }
     }
     return out;
-  }, [photos, shuffleTick, quoteEveryN]);
+  }, [photos, shuffleTick, quoteEveryN, sessionSeed]);
 
   return (
     <div className="grid gap-4 md:gap-6 mt-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -286,14 +316,11 @@ function MixedStream({ photos, onOpen, shuffleTick, quoteEveryN }: { photos: Pho
 }
 
 function PhotoTile({ item, onOpen }: { item: Extract<StreamItem, { kind: 'photo' }>; onOpen: (i: number) => void }) {
-  const wide = Math.random() < 0.22; // sometimes span wider
-  const aspects = ['aspect-[4/3]', 'aspect-square', 'aspect-[3/4]', 'aspect-[16/10]'] as const;
-  const aspect = aspects[Math.floor(Math.random() * aspects.length)];
   const theme = themeForPath(item.path);
   return (
-    <button onClick={() => onOpen(item.idx)} className={`group relative w-full overflow-hidden rounded-2xl ring-1 ring-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${wide ? 'lg:col-span-2' : ''}`}>
+    <button onClick={() => onOpen(item.idx)} className={`group relative w-full overflow-hidden rounded-2xl ring-1 ring-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${item.wide ? 'lg:col-span-2' : ''}`}>
       <img src={item.src} alt={item.file} className="absolute inset-0 h-full w-full object-cover scale-105 transition-transform duration-500 group-hover:scale-110" />
-      <div className={`relative ${aspect}`}>
+      <div className={`relative ${item.aspect}`}>
         <div className="absolute inset-0" style={{ backgroundImage: photoOverlayCss(theme) }} />
         <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end">
           <span className="mt-2 text-[10px] md:text-xs text-slate-300/80 truncate drop-shadow">{item.path}</span>
@@ -304,13 +331,10 @@ function PhotoTile({ item, onOpen }: { item: Extract<StreamItem, { kind: 'photo'
 }
 
 function QuoteTile({ item }: { item: Extract<StreamItem, { kind: 'quote' }> }) {
-  const wide = Math.random() < 0.18;
-  const tall = !wide && Math.random() < 0.4;
-  const aspect = wide ? 'aspect-[16/9]' : tall ? 'aspect-[4/5]' : 'aspect-[5/4]';
   const theme = themeForPath(item.contextPath);
   return (
-    <div className={`relative rounded-2xl ring-1 ring-white/10 ${wide ? 'lg:col-span-2' : ''}`} style={{ backgroundImage: gradientCss(theme) }}>
-      <div className={`flex items-center justify-center p-6 md:p-10 ${aspect}`}>
+    <div className={`relative rounded-2xl ring-1 ring-white/10 ${item.wide ? 'lg:col-span-2' : ''}`} style={{ backgroundImage: gradientCss(theme) }}>
+      <div className={`flex items-center justify-center p-6 md:p-10 ${item.aspect}`}>
         <div className="text-center max-w-2xl">
           <div className="text-xl md:text-3xl font-semibold leading-tight">“{item.text}”</div>
           {item.author && <div className="mt-2 text-xs md:text-sm text-slate-200/90">— {item.author}</div>}
@@ -358,11 +382,53 @@ function ThemeEditor({ albums, brandColor, setBrandColor, themeOverrides, setThe
   );
 }
 
-function shuffleInPlace<T>(arr: T[]): void {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+// Utilities for deterministic randomness
+function seededShuffle<T>(arr: T[], rng: () => number): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a;
 }
 
-function rand(min: number, max: number): number { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function mulberry32(seed: number) {
+  let t = seed >>> 0;
+  return function() {
+    t += 0x6D2B79F5;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function hashString(str: string): number {
+  // Simple 32-bit hash
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+// Generate N visually distinct colors using HSL
+function generatePalette(n: number): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < n; i++) {
+    const h = Math.round((360 * i) / n);
+    const s = 65; // %
+    const l = 50; // %
+    out.push(hslToHex(h, s, l));
+  }
+  return out;
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+  s /= 100; l /= 100;
+  const k = (n: number) => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n: number) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  const toHex = (x: number) => Math.round(255 * x).toString(16).padStart(2, '0');
+  return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`;
+}
