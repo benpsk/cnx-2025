@@ -1,0 +1,35 @@
+Duplicate removal manifest (exact SHA-256 matches)
+Generated: 2025-08-29 01:08:39
+
+Digest: 22db1be522a03ce72fa26a68a961b1b25d055482db95f87641164bce22fbea93
+  KEEP: images/cnx-bamboo-house/1756401226183.jpg
+  DEL : images/cnx-bamboo-house/1756401364453.jpg
+
+Digest: 297b421ed823fa7ef74b1bb1fc2049350fb5a2a7043d2ee43d69fda93e1b3a39
+  KEEP: images/cnx-bamboo-house/1756401222714.jpg
+  DEL : images/cnx-bamboo-house/1756401358031.jpg
+
+Digest: 33ab61721868f9091c1e46c9f6ab592560153098b287e4d6fb4b8a9551c58f50
+  KEEP: images/cnx-bamboo-house/1756401224841.jpg
+  DEL : images/cnx-bamboo-house/1756401362941.jpg
+
+Digest: 5142c372d6cd88561f87f80da5fa5f0858c35a8874be3a3ce939ee5f5469682f
+  KEEP: images/cnx-bamboo-house/1756401214342.jpg
+  DEL : images/cnx-bamboo-house/1756401355880.jpg
+
+Digest: 736c28be72167afd9c173bf65ec99f344b8064f39c890672412ce6197a650d55
+  KEEP: images/cnx-bamboo-house/1756401205209.jpg
+  DEL : images/cnx-bamboo-house/1756401340436.jpg
+
+Digest: 9b71a6ef6187b2df88db336185627f5d73e498899f8fc3dcd18afbf97fa225e9
+  KEEP: images/cnx-bamboo-house/1756401206507.jpg
+  DEL : images/cnx-bamboo-house/1756401351128.jpg
+
+Digest: a91db4eec5f28892481dee3b9d0a3c5cd31e155af87631b6fb113856b63a42a7
+  KEEP: images/cnx-bamboo-house/1756401210860.jpg
+  DEL : images/cnx-bamboo-house/1756401347767.jpg
+
+Digest: dcb59032fbfc9cdf4c6e23bd47348f6e3f4d0666beeebf9ff8629232c14ed453
+  KEEP: images/cnx-bamboo-house/1756401227852.jpg
+  DEL : images/cnx-bamboo-house/1756401367658.jpg
+

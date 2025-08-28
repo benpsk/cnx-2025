@@ -1,0 +1,370 @@
+Near-duplicate review manifest (8x8 aHash)
+Generated: 2025-08-29 01:12:48
+Mode: medium  Threshold: 10
+
+Group 1 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401122710.jpg
+  DEL?: images/cnx-bamboo-house/1756401291277.jpg
+
+Group 2 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401137442.jpg
+  DEL?: images/cnx-bamboo-house/1756401184915.jpg
+
+Group 3 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401160862.jpg
+  DEL?: images/cnx-bamboo-house/1756401171610.jpg
+
+Group 4 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401288678.jpg
+  DEL?: images/free-diving/1756401523938.jpg
+
+Group 5 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401373902.jpg
+  DEL?: images/cnx-bamboo-house/1756401375886.jpg
+
+Group 6 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401382314.jpg
+  DEL?: images/cnx-bamboo-house/1756401384904.jpg
+
+Group 7 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401388752.jpg
+  DEL?: images/cnx-bamboo-house/1756401390916.jpg
+
+Group 8 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401394539.jpg
+  DEL?: images/cnx-bamboo-house/1756401396122.jpg
+
+Group 9 (size=2):
+  KEEP: images/cnx-bamboo-house/1756401472385.jpg
+  DEL?: images/cnx-bamboo-house/1756401477902.jpg
+
+Group 10 (size=2):
+  KEEP: images/free-diving/1756401604623.jpg
+  DEL?: images/free-diving/1756401606196.jpg
+
+Group 11 (size=2):
+  KEEP: images/free-diving/1756401614929.jpg
+  DEL?: images/free-diving/1756401617353.jpg
+
+Group 12 (size=2):
+  KEEP: images/retrospect/1756401867091.jpg
+  DEL?: images/retrospect/1756401871292.jpg
+
+Group 13 (size=2):
+  KEEP: images/อบจ cnx/1756402077685.jpg
+  DEL?: images/อบจ cnx/1756402081687.jpg
+
+Group 14 (size=2):
+  KEEP: images/อบจ cnx/1756402085351.jpg
+  DEL?: images/อบจ cnx/1756402088933.jpg
+
+Group 15 (size=2):
+  KEEP: images/อบจ cnx/1756402303659.jpg
+  DEL?: images/อบจ cnx/1756402311128.jpg
+
+Group 16 (size=2):
+  KEEP: images/อบจ cnx/1756402493640.jpg
+  DEL?: images/อบจ cnx/1756402499459.jpg
+
+Group 17 (size=2):
+  KEEP: images/อบจ cnx/1756402513492.jpg
+  DEL?: images/อบจ cnx/1756402516459.jpg
+
+Group 18 (size=2):
+  KEEP: images/เนื้อกระทะอิสลาม/1756401659645.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401662122.jpg
+
+Group 19 (size=2):
+  KEEP: images/เนื้อกระทะอิสลาม/1756401706860.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401713412.jpg
+
+Group 20 (size=3):
+  KEEP: images/cnx-bamboo-house/1756401406342.jpg
+  DEL?: images/cnx-bamboo-house/1756401407785.jpg
+  DEL?: images/cnx-bamboo-house/1756401410268.jpg
+
+Group 21 (size=3):
+  KEEP: images/cnx-bamboo-house/1756401480920.jpg
+  DEL?: images/cnx-bamboo-house/1756401483418.jpg
+  DEL?: images/cnx-bamboo-house/1756401489525.jpg
+
+Group 22 (size=3):
+  KEEP: images/อบจ cnx/1756402148524.jpg
+  DEL?: images/อบจ cnx/1756402151923.jpg
+  DEL?: images/อบจ cnx/1756402155468.jpg
+
+Group 23 (size=4):
+  KEEP: images/อบจ cnx/1756402054401.jpg
+  DEL?: images/อบจ cnx/1756402057836.jpg
+  DEL?: images/อบจ cnx/1756402062103.jpg
+  DEL?: images/อบจ cnx/1756402068155.jpg
+
+Group 24 (size=4):
+  KEEP: images/อบจ cnx/1756402186487.jpg
+  DEL?: images/อบจ cnx/1756402190281.jpg
+  DEL?: images/อบจ cnx/1756402194597.jpg
+  DEL?: images/อบจ cnx/1756402208655.jpg
+
+Group 25 (size=4):
+  KEEP: images/เนื้อกระทะอิสลาม/1756401736115.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401740349.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401747837.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401759454.jpg
+
+Group 26 (size=5):
+  KEEP: images/เนื้อกระทะอิสลาม/1756401768220.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401771116.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401778303.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401784307.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401791816.jpg
+
+Group 27 (size=28):
+  KEEP: images/cnx-bamboo-house/1756401129409.jpg
+  DEL?: images/cnx-bamboo-house/1756401175179.jpg
+  DEL?: images/cnx-bamboo-house/1756401337805.jpg
+  DEL?: images/cnx-bamboo-house/1756401371906.jpg
+  DEL?: images/cnx-bamboo-house/1756401419673.jpg
+  DEL?: images/free-diving/1756401515898.jpg
+  DEL?: images/free-diving/1756401520973.jpg
+  DEL?: images/free-diving/1756401542429.jpg
+  DEL?: images/free-diving/1756401543087.jpg
+  DEL?: images/free-diving/1756401543683.jpg
+  DEL?: images/free-diving/1756401544301.jpg
+  DEL?: images/free-diving/1756401545137.jpg
+  DEL?: images/free-diving/1756401545758.jpg
+  DEL?: images/free-diving/1756401575025.jpg
+  DEL?: images/อบจ cnx/1756402160437.jpg
+  DEL?: images/อบจ cnx/1756402166769.jpg
+  DEL?: images/อบจ cnx/1756402172091.jpg
+  DEL?: images/อบจ cnx/1756402177274.jpg
+  DEL?: images/อบจ cnx/1756402182958.jpg
+  DEL?: images/อบจ cnx/1756402216434.jpg
+  DEL?: images/อบจ cnx/1756402222421.jpg
+  DEL?: images/อบจ cnx/1756402231168.jpg
+  DEL?: images/อบจ cnx/1756402237585.jpg
+  DEL?: images/อบจ cnx/1756402244440.jpg
+  DEL?: images/อบจ cnx/1756402252899.jpg
+  DEL?: images/อบจ cnx/1756402259285.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401811769.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401814607.jpg
+
+Group 28 (size=218):
+  KEEP: images/cnx-bamboo-house/1756401179728.jpg
+  DEL?: images/cnx-bamboo-house/1756401205209.jpg
+  DEL?: images/cnx-bamboo-house/1756401206507.jpg
+  DEL?: images/cnx-bamboo-house/1756401210860.jpg
+  DEL?: images/cnx-bamboo-house/1756401222714.jpg
+  DEL?: images/cnx-bamboo-house/1756401227852.jpg
+  DEL?: images/cnx-bamboo-house/1756401228830.jpg
+  DEL?: images/cnx-bamboo-house/1756401229913.jpg
+  DEL?: images/cnx-bamboo-house/1756401231435.jpg
+  DEL?: images/cnx-bamboo-house/1756401237113.jpg
+  DEL?: images/cnx-bamboo-house/1756401240645.jpg
+  DEL?: images/cnx-bamboo-house/1756401241564.jpg
+  DEL?: images/cnx-bamboo-house/1756401242410.jpg
+  DEL?: images/cnx-bamboo-house/1756401246229.jpg
+  DEL?: images/cnx-bamboo-house/1756401248650.jpg
+  DEL?: images/cnx-bamboo-house/1756401249827.jpg
+  DEL?: images/cnx-bamboo-house/1756401250943.jpg
+  DEL?: images/cnx-bamboo-house/1756401252348.jpg
+  DEL?: images/cnx-bamboo-house/1756401253999.jpg
+  DEL?: images/cnx-bamboo-house/1756401255214.jpg
+  DEL?: images/cnx-bamboo-house/1756401257525.jpg
+  DEL?: images/cnx-bamboo-house/1756401258941.jpg
+  DEL?: images/cnx-bamboo-house/1756401261683.jpg
+  DEL?: images/cnx-bamboo-house/1756401263723.jpg
+  DEL?: images/cnx-bamboo-house/1756401265110.jpg
+  DEL?: images/cnx-bamboo-house/1756401266429.jpg
+  DEL?: images/cnx-bamboo-house/1756401267752.jpg
+  DEL?: images/cnx-bamboo-house/1756401269820.jpg
+  DEL?: images/cnx-bamboo-house/1756401271278.jpg
+  DEL?: images/cnx-bamboo-house/1756401273732.jpg
+  DEL?: images/cnx-bamboo-house/1756401275111.jpg
+  DEL?: images/cnx-bamboo-house/1756401276813.jpg
+  DEL?: images/cnx-bamboo-house/1756401279165.jpg
+  DEL?: images/cnx-bamboo-house/1756401281303.jpg
+  DEL?: images/cnx-bamboo-house/1756401282714.jpg
+  DEL?: images/cnx-bamboo-house/1756401284160.jpg
+  DEL?: images/cnx-bamboo-house/1756401293115.jpg
+  DEL?: images/cnx-bamboo-house/1756401294217.jpg
+  DEL?: images/cnx-bamboo-house/1756401296291.jpg
+  DEL?: images/cnx-bamboo-house/1756401299475.jpg
+  DEL?: images/cnx-bamboo-house/1756401302650.jpg
+  DEL?: images/cnx-bamboo-house/1756401306313.jpg
+  DEL?: images/cnx-bamboo-house/1756401308170.jpg
+  DEL?: images/cnx-bamboo-house/1756401309806.jpg
+  DEL?: images/cnx-bamboo-house/1756401310875.jpg
+  DEL?: images/cnx-bamboo-house/1756401314145.jpg
+  DEL?: images/cnx-bamboo-house/1756401315510.jpg
+  DEL?: images/cnx-bamboo-house/1756401316667.jpg
+  DEL?: images/cnx-bamboo-house/1756401318470.jpg
+  DEL?: images/cnx-bamboo-house/1756401319629.jpg
+  DEL?: images/cnx-bamboo-house/1756401320879.jpg
+  DEL?: images/cnx-bamboo-house/1756401322310.jpg
+  DEL?: images/cnx-bamboo-house/1756401324580.jpg
+  DEL?: images/cnx-bamboo-house/1756401325961.jpg
+  DEL?: images/cnx-bamboo-house/1756401327418.jpg
+  DEL?: images/cnx-bamboo-house/1756401329037.jpg
+  DEL?: images/cnx-bamboo-house/1756401330246.jpg
+  DEL?: images/cnx-bamboo-house/1756401334553.jpg
+  DEL?: images/cnx-bamboo-house/1756401336042.jpg
+  DEL?: images/cnx-bamboo-house/1756401339141.jpg
+  DEL?: images/cnx-bamboo-house/1756401343284.jpg
+  DEL?: images/cnx-bamboo-house/1756401354579.jpg
+  DEL?: images/cnx-bamboo-house/1756401359527.jpg
+  DEL?: images/cnx-bamboo-house/1756401361387.jpg
+  DEL?: images/cnx-bamboo-house/1756401368547.jpg
+  DEL?: images/cnx-bamboo-house/1756401369649.jpg
+  DEL?: images/cnx-bamboo-house/1756401398468.jpg
+  DEL?: images/cnx-bamboo-house/1756401401873.jpg
+  DEL?: images/cnx-bamboo-house/1756401413144.jpg
+  DEL?: images/cnx-bamboo-house/1756401415892.jpg
+  DEL?: images/cnx-bamboo-house/1756401423307.jpg
+  DEL?: images/cnx-bamboo-house/1756401426498.jpg
+  DEL?: images/cnx-bamboo-house/1756401431270.jpg
+  DEL?: images/cnx-bamboo-house/1756401439524.jpg
+  DEL?: images/cnx-bamboo-house/1756401446145.jpg
+  DEL?: images/cnx-bamboo-house/1756401460383.jpg
+  DEL?: images/cnx-bamboo-house/1756401467612.jpg
+  DEL?: images/cnx-bamboo-house/1756401491500.jpg
+  DEL?: images/free-diving/1756401528267.jpg
+  DEL?: images/free-diving/1756401536973.jpg
+  DEL?: images/free-diving/1756401537756.jpg
+  DEL?: images/free-diving/1756401538425.jpg
+  DEL?: images/free-diving/1756401539012.jpg
+  DEL?: images/free-diving/1756401539804.jpg
+  DEL?: images/free-diving/1756401540416.jpg
+  DEL?: images/free-diving/1756401541086.jpg
+  DEL?: images/free-diving/1756401541747.jpg
+  DEL?: images/free-diving/1756401546388.jpg
+  DEL?: images/free-diving/1756401546940.jpg
+  DEL?: images/free-diving/1756401547574.jpg
+  DEL?: images/free-diving/1756401548186.jpg
+  DEL?: images/free-diving/1756401549021.jpg
+  DEL?: images/free-diving/1756401549568.jpg
+  DEL?: images/free-diving/1756401550186.jpg
+  DEL?: images/free-diving/1756401550994.jpg
+  DEL?: images/free-diving/1756401551683.jpg
+  DEL?: images/free-diving/1756401552355.jpg
+  DEL?: images/free-diving/1756401553037.jpg
+  DEL?: images/free-diving/1756401555986.jpg
+  DEL?: images/free-diving/1756401556659.jpg
+  DEL?: images/free-diving/1756401557275.jpg
+  DEL?: images/free-diving/1756401557977.jpg
+  DEL?: images/free-diving/1756401558620.jpg
+  DEL?: images/free-diving/1756401559315.jpg
+  DEL?: images/free-diving/1756401559957.jpg
+  DEL?: images/free-diving/1756401563261.jpg
+  DEL?: images/free-diving/1756401564020.jpg
+  DEL?: images/free-diving/1756401565185.jpg
+  DEL?: images/free-diving/1756401565797.jpg
+  DEL?: images/free-diving/1756401566741.jpg
+  DEL?: images/free-diving/1756401571117.jpg
+  DEL?: images/free-diving/1756401571787.jpg
+  DEL?: images/free-diving/1756401573824.jpg
+  DEL?: images/free-diving/1756401575654.jpg
+  DEL?: images/free-diving/1756401576303.jpg
+  DEL?: images/free-diving/1756401576957.jpg
+  DEL?: images/free-diving/1756401577591.jpg
+  DEL?: images/free-diving/1756401578245.jpg
+  DEL?: images/free-diving/1756401578965.jpg
+  DEL?: images/free-diving/1756401579644.jpg
+  DEL?: images/free-diving/1756401587284.jpg
+  DEL?: images/free-diving/1756401592523.jpg
+  DEL?: images/retrospect/1756401831874.jpg
+  DEL?: images/retrospect/1756401837306.jpg
+  DEL?: images/retrospect/1756401843145.jpg
+  DEL?: images/retrospect/1756401845209.jpg
+  DEL?: images/retrospect/1756401848317.jpg
+  DEL?: images/retrospect/1756401854684.jpg
+  DEL?: images/retrospect/1756401856655.jpg
+  DEL?: images/retrospect/1756401858446.jpg
+  DEL?: images/retrospect/1756401859678.jpg
+  DEL?: images/retrospect/1756401860764.jpg
+  DEL?: images/retrospect/1756401864121.jpg
+  DEL?: images/retrospect/1756401878967.jpg
+  DEL?: images/retrospect/1756401880709.jpg
+  DEL?: images/retrospect/1756401882292.jpg
+  DEL?: images/retrospect/1756401884395.jpg
+  DEL?: images/retrospect/1756401886821.jpg
+  DEL?: images/retrospect/1756401904351.jpg
+  DEL?: images/อบจ cnx/1756402094010.jpg
+  DEL?: images/อบจ cnx/1756402098824.jpg
+  DEL?: images/อบจ cnx/1756402102410.jpg
+  DEL?: images/อบจ cnx/1756402107047.jpg
+  DEL?: images/อบจ cnx/1756402110158.jpg
+  DEL?: images/อบจ cnx/1756402117079.jpg
+  DEL?: images/อบจ cnx/1756402120939.jpg
+  DEL?: images/อบจ cnx/1756402127608.jpg
+  DEL?: images/อบจ cnx/1756402131106.jpg
+  DEL?: images/อบจ cnx/1756402134274.jpg
+  DEL?: images/อบจ cnx/1756402138132.jpg
+  DEL?: images/อบจ cnx/1756402141157.jpg
+  DEL?: images/อบจ cnx/1756402262048.jpg
+  DEL?: images/อบจ cnx/1756402268945.jpg
+  DEL?: images/อบจ cnx/1756402273202.jpg
+  DEL?: images/อบจ cnx/1756402275486.jpg
+  DEL?: images/อบจ cnx/1756402279103.jpg
+  DEL?: images/อบจ cnx/1756402280690.jpg
+  DEL?: images/อบจ cnx/1756402285619.jpg
+  DEL?: images/อบจ cnx/1756402293732.jpg
+  DEL?: images/อบจ cnx/1756402296516.jpg
+  DEL?: images/อบจ cnx/1756402299808.jpg
+  DEL?: images/อบจ cnx/1756402315069.jpg
+  DEL?: images/อบจ cnx/1756402318919.jpg
+  DEL?: images/อบจ cnx/1756402332653.jpg
+  DEL?: images/อบจ cnx/1756402337986.jpg
+  DEL?: images/อบจ cnx/1756402349252.jpg
+  DEL?: images/อบจ cnx/1756402356057.jpg
+  DEL?: images/อบจ cnx/1756402359238.jpg
+  DEL?: images/อบจ cnx/1756402362958.jpg
+  DEL?: images/อบจ cnx/1756402367703.jpg
+  DEL?: images/อบจ cnx/1756402371130.jpg
+  DEL?: images/อบจ cnx/1756402373958.jpg
+  DEL?: images/อบจ cnx/1756402378911.jpg
+  DEL?: images/อบจ cnx/1756402384769.jpg
+  DEL?: images/อบจ cnx/1756402389241.jpg
+  DEL?: images/อบจ cnx/1756402394941.jpg
+  DEL?: images/อบจ cnx/1756402399425.jpg
+  DEL?: images/อบจ cnx/1756402402431.jpg
+  DEL?: images/อบจ cnx/1756402407305.jpg
+  DEL?: images/อบจ cnx/1756402412003.jpg
+  DEL?: images/อบจ cnx/1756402416125.jpg
+  DEL?: images/อบจ cnx/1756402419812.jpg
+  DEL?: images/อบจ cnx/1756402433342.jpg
+  DEL?: images/อบจ cnx/1756402437159.jpg
+  DEL?: images/อบจ cnx/1756402441424.jpg
+  DEL?: images/อบจ cnx/1756402443827.jpg
+  DEL?: images/อบจ cnx/1756402447876.jpg
+  DEL?: images/อบจ cnx/1756402451242.jpg
+  DEL?: images/อบจ cnx/1756402454224.jpg
+  DEL?: images/อบจ cnx/1756402456539.jpg
+  DEL?: images/อบจ cnx/1756402461921.jpg
+  DEL?: images/อบจ cnx/1756402464488.jpg
+  DEL?: images/อบจ cnx/1756402466712.jpg
+  DEL?: images/อบจ cnx/1756402469215.jpg
+  DEL?: images/อบจ cnx/1756402473178.jpg
+  DEL?: images/อบจ cnx/1756402476043.jpg
+  DEL?: images/อบจ cnx/1756402479355.jpg
+  DEL?: images/อบจ cnx/1756402482492.jpg
+  DEL?: images/อบจ cnx/1756402485924.jpg
+  DEL?: images/อบจ cnx/1756402502047.jpg
+  DEL?: images/อบจ cnx/1756402505283.jpg
+  DEL?: images/อบจ cnx/1756402509808.jpg
+  DEL?: images/อบจ cnx/1756402523556.jpg
+  DEL?: images/อบจ cnx/1756402527551.jpg
+  DEL?: images/อบจ cnx/1756402531824.jpg
+  DEL?: images/อบจ cnx/1756402534482.jpg
+  DEL?: images/อบจ cnx/1756402542185.jpg
+  DEL?: images/อบจ cnx/1756402547640.jpg
+  DEL?: images/อบจ cnx/1756402553073.jpg
+  DEL?: images/อบจ cnx/1756402555415.jpg
+  DEL?: images/อบจ cnx/1756402556402.jpg
+  DEL?: images/อบจ cnx/1756402558180.jpg
+  DEL?: images/อบจ cnx/1756402560340.jpg
+  DEL?: images/อบจ cnx/1756402563025.jpg
+  DEL?: images/อบจ cnx/1756402564986.jpg
+  DEL?: images/อบจ cnx/1756402566382.jpg
+  DEL?: images/อบจ cnx/1756402568182.jpg
+  DEL?: images/เนื้อกระทะอิสลาม/1756401808164.jpg
+
