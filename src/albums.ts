@@ -33,9 +33,13 @@ export function getRawImages(): RawImage[] {
   return raws.sort((a, b) => a.path.localeCompare(b.path));
 }
 
+// Fast path: avoid preloading all images just to get dimensions.
+// Provide a sane placeholder aspect ratio so the gallery can render immediately.
+// This eliminates the multi-minute stall from fetching every image upfront on GH Pages.
 export async function measureImages(raws: RawImage[]): Promise<PhotoItem[]> {
-  const jobs = raws.map(r => loadImageSize(r.src).then(dim => ({ ...r, ...dim })));
-  return Promise.all(jobs);
+  // Default to a landscape-friendly aspect; the gallery uses object-fit: cover.
+  const DEFAULT = { width: 4, height: 3 };
+  return raws.map(r => ({ ...r, ...DEFAULT }));
 }
 
 export function groupIntoAlbums(items: PhotoItem[]): Album[] {
@@ -58,12 +62,14 @@ function albumTitleFromPath(p: string): string {
   return base.replace(/[-_]+/g, ' ');
 }
 
-function loadImageSize(src: string): Promise<{ width: number; height: number }>
-{ return new Promise((resolve, reject) => {
+// Legacy helper kept for reference. Not used in the fast path above because it
+// forces the browser to download every image to read dimensions, which tanks
+// performance on large galleries, especially on GitHub Pages.
+function loadImageSize(src: string): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
     img.onerror = reject;
     img.src = src;
   });
 }
-

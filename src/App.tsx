@@ -160,6 +160,8 @@ function Gallery({ photos, onOpen, indexFor }: { photos: PhotoItem[]; onOpen: (i
           <div style={{ ...wrapperStyle, position: 'relative' }} className="relative overflow-hidden">
             <img
               {...imageProps}
+              loading="lazy"
+              decoding="async"
               className={(imageProps.className ?? '') + ' block'}
               style={{
                 ...imageProps.style,
